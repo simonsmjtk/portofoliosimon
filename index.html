@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f5f2">
+  <meta name="description" content="Simon Simanjuntak — Data Analyst, Web Developer, and UI/UX Designer Portfolio">
+  <title>Simon Simanjuntak — Portfolio</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f6f5f2;
+      --surface: #fff;
+      --ink: #242824;
+      --muted: #6d736d;
+      --line: #e5e5df;
+      --accent: #617767;
+      --accent-soft: #e9eee9;
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font: 16px/1.65 var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    .wrap { width: min(1080px, calc(100% - 48px)); margin-inline: auto; }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 76px;
+      border-bottom: 1px solid var(--line);
+    }
+    .brand { font-size: .9rem; font-weight: 700; letter-spacing: .04em; }
+    nav { display: flex; gap: 30px; }
+    nav a, .text-link { color: var(--muted); font-size: .88rem; text-decoration: none; }
+    nav a:hover, .text-link:hover { color: var(--accent); }
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.6fr) minmax(220px, .7fr);
+      align-items: center;
+      gap: 72px;
+      padding-block: 104px 96px;
+    }
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--accent);
+      font-size: .76rem;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      max-width: 720px;
+      margin-bottom: 22px;
+      font: 400 clamp(2.7rem, 6vw, 5rem)/1.08 var(--serif);
+      letter-spacing: -.045em;
+    }
+    .hero-copy { max-width: 590px; color: var(--muted); font-size: 1.05rem; }
+    .actions { display: flex; align-items: center; gap: 22px; margin-top: 30px; }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      min-height: 46px;
+      padding: 0 19px;
+      border: 1px solid var(--accent);
+      border-radius: 4px;
+      background: var(--accent);
+      color: #fff;
+      font-size: .87rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background .2s ease, transform .2s ease;
+    }
+    .button:hover { background: #4d6253; transform: translateY(-1px); }
+    .profile-card {
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--surface);
+    }
+    .profile-photo-wrap {
+      position: relative;
+      display: grid;
+      width: 112px;
+      height: 112px;
+      place-items: center;
+      overflow: hidden;
+      margin-bottom: 22px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: var(--accent-soft);
+    }
+    .profile-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .profile-photo-fallback {
+      padding: 12px;
+      color: var(--accent);
+      font-size: .73rem;
+      line-height: 1.4;
+      text-align: center;
+    }
+    .profile-photo[hidden], .profile-photo-fallback[hidden] { display: none; }
+    .profile-mark {
+      display: grid;
+      width: 58px;
+      height: 58px;
+      place-items: center;
+      margin-bottom: 22px;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font: 1.5rem var(--serif);
+    }
+    .profile-card h2 { margin-bottom: 4px; font-size: 1rem; }
+    .profile-card p { margin-bottom: 18px; color: var(--muted); font-size: .88rem; }
+    .availability { display: flex; align-items: center; gap: 9px; color: var(--muted); font-size: .8rem; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: #819985; }
+    section { padding-block: 78px; border-top: 1px solid var(--line); }
+    .section-heading { margin-bottom: 34px; }
+    .section-heading h2 { margin-bottom: 8px; font: 400 clamp(2rem, 4vw, 2.8rem)/1.2 var(--serif); letter-spacing: -.025em; }
+    .section-heading p { max-width: 560px; margin-bottom: 0; color: var(--muted); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
+    .about-grid p { max-width: 550px; color: var(--muted); }
+    .skill-list { display: flex; flex-wrap: wrap; gap: 10px; align-content: start; }
+    .skill {
+      padding: 7px 12px;
+      border: 1px solid var(--line);
+      border-radius: 3px;
+      background: var(--surface);
+      color: #515851;
+      font-size: .83rem;
+    }
+    .projects { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .project {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: var(--surface);
+    }
+    .media-frame {
+      display: grid;
+      min-height: 180px;
+      place-items: center;
+      overflow: hidden;
+      background: #ecece7;
+      color: var(--muted);
+      font-size: .82rem;
+    }
+    .media-frame img { display: block; width: 100%; height: 100%; min-height: 180px; object-fit: cover; }
+    .media-frame img[hidden], .media-fallback[hidden] { display: none; }
+    .media-fallback { padding: 18px; text-align: center; }
+    .project-content { display: flex; flex: 1; flex-direction: column; padding: 21px; }
+    .project-index { margin-bottom: 13px; color: var(--accent); font-size: .78rem; font-weight: 700; }
+    .project h3 { margin-bottom: 9px; font: 400 1.45rem var(--serif); }
+    .project p { margin-bottom: 20px; color: var(--muted); font-size: .88rem; }
+    .project-view {
+      margin-top: auto;
+      padding: 0;
+      border: 0;
+      background: none;
+      color: var(--accent);
+      font: 600 .83rem var(--sans);
+      text-align: left;
+      cursor: pointer;
+    }
+    .project-dialog {
+      width: min(760px, calc(100% - 32px));
+      max-height: min(90vh, 900px);
+      padding: 0;
+      overflow: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      color: var(--ink);
+      box-shadow: 0 24px 80px rgb(0 0 0 / 25%);
+    }
+    .project-dialog::backdrop { background: rgb(20 25 22 / 65%); }
+    .dialog-content { padding: clamp(20px, 5vw, 36px); }
+    .dialog-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; }
+    .dialog-header h2 { margin-bottom: 20px; font: 400 clamp(1.7rem, 4vw, 2.4rem)/1.2 var(--serif); }
+    .dialog-close {
+      flex: 0 0 auto;
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: var(--paper);
+      color: var(--ink);
+      font-size: 1.4rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+    .dialog-image-wrap {
+      display: grid;
+      min-height: 180px;
+      place-items: center;
+      overflow: hidden;
+      border-radius: 5px;
+      background: #ecece7;
+    }
+    .dialog-image { display: block; max-width: 100%; max-height: 58vh; object-fit: contain; }
+    .dialog-image[hidden], .dialog-image-fallback[hidden] { display: none; }
+    .dialog-role { margin: 22px 0 8px; color: var(--accent); font-size: .8rem; font-weight: 700; }
+    .dialog-description { margin-bottom: 0; color: var(--muted); }
+    .certificates { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    .certificate {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: var(--surface);
+    }
+    .certificate .media-frame { min-height: 190px; }
+    .certificate .media-frame img { min-height: 190px; object-fit: contain; }
+    .certificate-info { padding: 18px 20px; }
+    .certificate-info h3 { margin-bottom: 4px; font-size: .98rem; }
+    .certificate-info .certificate-meta { margin-bottom: 10px; color: var(--accent); font-size: .8rem; font-weight: 600; }
+    .certificate-info .certificate-description { margin-bottom: 0; color: var(--muted); font-size: .84rem; }
+    .contact {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 30px;
+      padding-bottom: 88px;
+    }
+    .contact .section-heading { margin-bottom: 0; }
+    .contact .section-heading p { max-width: 470px; }
+    footer { padding-block: 22px; border-top: 1px solid var(--line); color: var(--muted); font-size: .8rem; }
+    footer .wrap { display: flex; justify-content: space-between; gap: 16px; }
+    :focus-visible { outline: 3px solid #9aab9e; outline-offset: 3px; }
+
+    @media (max-width: 720px) {
+      .wrap { width: min(100% - 36px, 560px); }
+      .topbar { min-height: 68px; }
+      nav { gap: 16px; }
+      nav a { font-size: .8rem; }
+      .hero { grid-template-columns: 1fr; gap: 35px; padding-block: 72px; }
+      .profile-card { max-width: 400px; }
+      section { padding-block: 60px; }
+      .about-grid { grid-template-columns: 1fr; gap: 20px; }
+      .projects { grid-template-columns: 1fr; }
+      .certificates { grid-template-columns: 1fr; }
+      .contact { align-items: start; flex-direction: column; padding-bottom: 62px; }
+    }
+    @media (max-width: 420px) {
+      nav { gap: 11px; }
+      nav a { font-size: .74rem; }
+      .wrap { width: calc(100% - 30px); }
+      .actions { align-items: flex-start; flex-direction: column; gap: 15px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="wrap topbar">
+    <a class="brand" href="#beranda" aria-label="Back to home">PORTFOLIO</a>
+    <nav aria-label="Primary navigation">
+      <a href="#tentang">About</a>
+      <a href="#proyek">Projects</a>
+      <a href="#sertifikat">Certificates</a>
+      <a href="#kontak">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="wrap hero" id="beranda">
+      <div>
+        <p class="eyebrow">Full-Stack Developer</p>
+        <h1>I am Simon Simanjuntak, S.Kom</h1>
+        <p class="hero-copy">Information Systems graduate with experience in data analysis, web development, and website design. Motivated to deliver accurate insights, practical digital solutions, and measurable value to an organization.</p>
+        <div class="actions">
+          <a class="button" href="#proyek">View my projects</a>
+          <a class="text-link" href="mailto:simonsimanjuntak270904@gmail.com">Contact me ↗</a>
+        </div>
+      </div>
+      <aside class="profile-card" aria-label="Profile summary">
+        <div class="profile-photo-wrap">
+          <img class="profile-photo" src="profilsimon.jpg" alt="Simon Simanjuntak profile photo" hidden>
+          <span class="profile-photo-fallback">Your photo<br>images/foto-saya.jpg</span>
+        </div>
+        <h2>Simon Simanjuntak</h2>
+        <p>Fresh graduate · Gunadarma University</p>
+        <div class="availability"><span class="dot" aria-hidden="true"></span>Open to work</div>
+      </aside>
+    </div>
+
+    <section id="tentang">
+      <div class="wrap">
+        <div class="section-heading">
+          <p class="eyebrow">About me</p>
+          <h2>Analytical thinking, practical execution.</h2>
+        </div>
+        <div class="about-grid">
+          <p>I am Simon Leonardo Simanjuntak, an Information Systems graduate from Gunadarma University with a 3.66 GPA and a strong motivation to build a professional career. I am experienced working both independently and within teams. My academic background is strengthened by an internship at the Ministry of Finance, where I contributed to data analysis, web development, and website design. I bring strong communication, public service, document management, and administrative skills, supported by fast learning, attention to detail, accountability, and a quality-oriented mindset.</p>
+          <div class="skill-list" aria-label="Skills">
+            <span class="skill">Python</span>
+            <span class="skill">JavaScript</span>
+            <span class="skill">C++</span>
+            <span class="skill">Figma</span>
+            <span class="skill">PHP</span>
+            <span class="skill">phpMyAdmin</span>
+            <span class="skill">Joomla</span>
+            <span class="skill">Communication</span>
+            <span class="skill">Presentation</span>
+            <span class="skill">Data Analysis</span>
+            <span class="skill">Database</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="proyek">
+      <div class="wrap">
+        <div class="section-heading">
+          <p class="eyebrow">Selected work</p>
+          <h2>Projects I have worked on.</h2>
+          <p>Choose projects that best match the role you are applying for. Highlight your contribution, the tools used, and measurable outcomes.</p>
+        </div>
+        <div class="projects">
+          <article class="project">
+            <div class="media-frame">
+              <img src="Project1.png" alt="Mobile coffee shop login screen design" hidden>
+              <span class="media-fallback">Coffee Shop Mobile Login UI<br>img/Project1.png</span>
+            </div>
+            <div class="project-content">
+              <span class="project-index">2024 · UI/UX Designer</span>
+              <h3>Coffee Shop Mobile Login UI</h3>
+              <p>Designed a warm, user-friendly mobile login experience for a coffee shop application. The interface includes email and password fields, account creation and password recovery actions, clear visual hierarchy, and a coffee-themed identity. Designed with Figma, with a strong focus on accessibility and an efficient mobile sign-in flow.</p>
+              <button class="project-view" type="button">View project ↗</button>
+            </div>
+          </article>
+          <article class="project">
+            <div class="media-frame">
+              <img src="Project2.png" alt="HobiBekasan account login page" hidden>
+              <span class="media-fallback">HobiBekasan Login Page<br>img/Project2.png</span>
+            </div>
+            <div class="project-content">
+              <span class="project-index">2026 · Web Developer</span>
+              <h3>HobiBekasan Website</h3>
+              <p>Developed and designed a responsive login interface for HobiBekasan, a hobby and collectible marketplace. Built account selection, email, password, registration, and password recovery elements with a clear visual hierarchy. Designed to provide a consistent, accessible, and easy-to-use authentication experience across the website.</p>
+              <button class="project-view" type="button">View project ↗</button>
+            </div>
+          </article>
+          <article class="project">
+            <div class="media-frame">
+              <img src="Project3.png" alt="Toko Kelontong Ardo storefront website" hidden>
+              <span class="media-fallback">Toko Kelontong Ardo Website<br>img/Project3.png</span>
+            </div>
+            <div class="project-content">
+              <span class="project-index">2024 · Web Developer &amp; Designer</span>
+              <h3>Toko Kelontong Ardo Website</h3>
+              <p>Created a responsive product showcase website for Toko Kelontong Ardo. The project presents the store identity, business information, product navigation, and customer-facing content through a simple and recognizable interface. Implemented a clean visual structure to help customers quickly understand the store and browse available information.</p>
+              <button class="project-view" type="button">View project ↗</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="sertifikat">
+      <div class="wrap">
+        <div class="section-heading">
+          <p class="eyebrow">Certificates</p>
+          <h2>Training and qualifications.</h2>
+          <p>Add certifications that are relevant to the role you are targeting.</p>
+        </div>
+        <div class="certificates">
+          <article class="certificate">
+            <div class="media-frame">
+              <img src="sertifikatmagang.jpg" alt="Ministry of Finance internship certificate" hidden>
+              <span class="media-fallback">Ministry of Finance internship certificate<br>img/sertifikatmagang.jpg</span>
+            </div>
+            <div class="certificate-info">
+              <h3>Ministry of Finance Internship</h3>
+              <p class="certificate-meta">Directorate General of Treasury, North Sumatra · 2025</p>
+              <p class="certificate-description">Contributed to data analysis, website design, and web development activities during the internship. Tools used: Joomla, Python, Figma, JavaScript, and PHP.</p>
+            </div>
+          </article>
+          <article class="certificate">
+            <div class="media-frame">
+              <img src="bnsp.png" alt="BNSP Junior Web Programmer competency certificate" hidden>
+              <span class="media-fallback">BNSP Junior Web Programmer certificate<br>img/bnsp.png</span>
+            </div>
+            <div class="certificate-info">
+              <h3>Junior Web Programmer Competency Certificate</h3>
+              <p class="certificate-meta">BNSP · 2026</p>
+              <p class="certificate-description">Completed programming competency activities for the Junior Web Programmer qualification, including building web pages and implementing features. Tools and technologies used: HTML, CSS, JavaScript, PHP, Python, and phpMyAdmin.</p>
+            </div>
+          </article>
+          <article class="certificate">
+            <div class="media-frame">
+              <img src="a1.jpg" alt="Kampung Inggris Jogja English program certificate" hidden>
+              <span class="media-fallback">Kampung Inggris Jogja English program certificate<br>img/a1.jpg</span>
+            </div>
+            <div class="certificate-info">
+              <h3>English Grammar and Speaking Program</h3>
+              <p class="certificate-meta">Kampung Inggris Jogja · 2024</p>
+              <p class="certificate-description">Completed a two-week English program with practice in grammar, speaking, pronunciation, and vocabulary. The certificate does not specify digital tools; activities focused on language learning and communication practice.</p>
+            </div>
+          </article>
+          <article class="certificate">
+            <div class="media-frame">
+              <img src="Sertifikat Gunadarma.jpeg" alt="ESET Campus Security Day certificate" hidden>
+              <span class="media-fallback">ESET Campus Security Day certificate<br>img/Sertifikat Gunadarma.jpeg</span>
+            </div>
+            <div class="certificate-info">
+              <h3>ESET Campus Security Day</h3>
+              <p class="certificate-meta">Universitas Gunadarma &amp; ESET · 2025</p>
+              <p class="certificate-description">Attended a cybersecurity awareness event focused on protecting personal data from cyberattacks. ESET was the event's security partner; the certificate does not list specific software tools or hands-on activities.</p>
+            </div>
+          </article>
+          <article class="certificate">
+            <div class="media-frame">
+              <img src="worshop1.png" alt="Basic Web Application Design training certificate" hidden>
+              <span class="media-fallback">Basic Web Application Design certificate<br>img/worshop1.png</span>
+            </div>
+            <div class="certificate-info">
+              <h3>Basic Web Application Design</h3>
+              <p class="certificate-meta">Universitas Gunadarma · 2025</p>
+              <p class="certificate-description">Completed training in the fundamentals of web application design, held from September 22–27, 2025. Activities focused on planning and designing a web application; specific design software is not listed on the certificate.</p>
+            </div>
+          </article>
+          <article class="certificate">
+            <div class="media-frame">
+              <img src="worshop2.png" alt="Intermediate Cisco Router WAN networking training certificate" hidden>
+              <span class="media-fallback">Cisco Router WAN Networking certificate<br>img/worshop2.png</span>
+            </div>
+            <div class="certificate-info">
+              <h3>Intermediate WAN Networking with Cisco Routers</h3>
+              <p class="certificate-meta">Universitas Gunadarma · 2025</p>
+              <p class="certificate-description">Completed intermediate-level training in wide area network (WAN) networking using Cisco routers. Activities covered router-based networking concepts and configuration; the certificate does not identify a specific simulator or software tool.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="kontak">
+      <div class="wrap contact">
+        <div class="section-heading">
+          <p class="eyebrow">Let's connect</p>
+          <h2>Contact me.</h2>
+          <p>For questions or career opportunities, please contact me by email.</p>
+        </div>
+        <a class="button" href="mailto:simonsimanjuntak270904@gmail.com">Send email ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <dialog class="project-dialog" aria-labelledby="project-dialog-title">
+    <div class="dialog-content">
+      <div class="dialog-header">
+        <h2 id="project-dialog-title"></h2>
+        <button class="dialog-close" type="button" aria-label="Close project details">&times;</button>
+      </div>
+      <div class="dialog-image-wrap">
+        <img class="dialog-image" alt="" hidden>
+        <span class="dialog-image-fallback" hidden>Project image is unavailable.</span>
+      </div>
+      <p class="dialog-role"></p>
+      <p class="dialog-description"></p>
+    </div>
+  </dialog>
+
+  <footer>
+    <div class="wrap">
+      <span>© <span id="year"></span> Simon Simanjuntak</span>
+      <a class="text-link" href="mailto:simonsimanjuntak270904@gmail.com">simonsimanjuntak270904@gmail.com</a>
+    </div>
+  </footer>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    document.querySelectorAll(".media-frame img, .profile-photo").forEach((image) => {
+      const fallback = image.nextElementSibling;
+      const showImage = () => {
+        image.hidden = false;
+        fallback.hidden = true;
+      };
+      if (image.complete && image.naturalWidth > 0) showImage();
+      image.addEventListener("load", showImage);
+      image.addEventListener("error", () => {
+        image.hidden = true;
+        fallback.hidden = false;
+      });
+    });
+
+    const projectDialog = document.querySelector(".project-dialog");
+    const dialogTitle = document.getElementById("project-dialog-title");
+    const dialogImage = projectDialog.querySelector(".dialog-image");
+    const dialogImageFallback = projectDialog.querySelector(".dialog-image-fallback");
+
+    document.querySelectorAll(".project-view").forEach((button) => {
+      button.addEventListener("click", () => {
+        const project = button.closest(".project");
+        const projectImage = project.querySelector(".media-frame img");
+
+        dialogTitle.textContent = project.querySelector("h3").textContent;
+        projectDialog.querySelector(".dialog-role").textContent = project.querySelector(".project-index").textContent;
+        projectDialog.querySelector(".dialog-description").textContent = project.querySelector(".project-content p").textContent;
+        dialogImage.alt = projectImage.alt;
+        dialogImage.hidden = true;
+        dialogImageFallback.hidden = true;
+        dialogImage.src = projectImage.src;
+        if (projectImage.complete && projectImage.naturalWidth > 0) {
+          dialogImage.hidden = false;
+        } else {
+          dialogImageFallback.hidden = false;
+        }
+        projectDialog.showModal();
+      });
+    });
+
+    dialogImage.addEventListener("load", () => {
+      dialogImage.hidden = false;
+      dialogImageFallback.hidden = true;
+    });
+    dialogImage.addEventListener("error", () => {
+      dialogImage.hidden = true;
+      dialogImageFallback.hidden = false;
+    });
+    projectDialog.querySelector(".dialog-close").addEventListener("click", () => projectDialog.close());
+    projectDialog.addEventListener("click", (event) => {
+      if (event.target === projectDialog) projectDialog.close();
+    });
+  </script>
+</body>
+</html>
